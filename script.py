@@ -19,68 +19,84 @@ damages = ['Damages not recorded', '100M', 'Damages not recorded', '40M', '27.9M
 # deaths for each hurricane
 deaths = [90,4000,16,3103,179,184,408,682,5,1023,43,319,688,259,37,11,2068,269,318,107,65,19325,51,124,17,1836,125,87,45,133,603,138,3057,74]
 
-# write your update damages function here:
+# Update Recorded Damages
+conversion = {"M": 1000000,
+              "B": 1000000000}
+def update_damages():
+  damages_new = []
+  for damage in damages:
+    if damage[0] != "D":
+      damages_new.append(float(damage[:-1]) * conversion[damage[-1]])
+    else: 
+      damages_new.append("Damages not recorded")
+  return damages_new
+
+# Test function by updating damages
+damages = update_damages()
+#print(damages)
+
+# Create and view the hurricanes dictionary
+hurricanes = {}
+for i in range(len(names)):
+  hurricanes[names[i]] = {"Names" : names[i], "Month": months[i], "Year" : years[i], "Max Sustained Wind" : max_sustained_winds[i], "Areas Affected" : areas_affected[i], "Damage" : damages[i], "Deaths": deaths[i]}
+#print(hurricanes)
+
+# Create a new dictionary of hurricanes with year and key
+hurricanes_year_key = {}
+for i in range(len(years)):
+  hurricanes_year_key[years[i]] = hurricanes[names[i]]
+#print(hurricanes_year_key)
+
+# Create dictionary of areas to store the number of hurricanes involved in
+locations_no_removals = []
+for area in areas_affected:
+  for each in area:
+    locations_no_removals.append(each)
+locations_no_dups = []
+for loc in locations_no_removals:
+  if loc not in locations_no_dups:
+    locations_no_dups.append(loc)
+location_counts = []
+for loc in locations_no_dups:
+  location_counts.append(locations_no_removals.count(loc))
+affected_area_counts = {}
+for i in range(len(locations_no_dups)):
+  affected_area_counts[locations_no_dups[i]] = location_counts[i] 
+#print(affected_area_counts)
 
 
 
 
 
+# 5 
+# Calculating Maximum Hurricane Count
+
+# find most frequently affected area and the number of hurricanes involved in
 
 
-# write your construct hurricane dictionary function here:
+# 6
+# Calculating the Deadliest Hurricane
+
+# find highest mortality hurricane and the number of deaths
+
+# 7
+# Rating Hurricanes by Mortality
 
 
+# categorize hurricanes in new dictionary with mortality severity as key
 
 
+# 8 Calculating Hurricane Maximum Damage
+
+# find highest damage inducing hurricane and its total cost
 
 
-
-# write your construct hurricane by year dictionary function here:
-
-
-
-
-
-
-
-# write your count affected areas function here:
-
-
-
-
-
-
-
-# write your find most affected area function here:
-
-
-
-
-
-
-
-# write your greatest number of deaths function here:
-
-
-
-
-
-
-
-# write your catgeorize by mortality function here:
-
-
-
-
-
-
-
-# write your greatest damage function here:
-
-
-
-
-
-
-
-# write your catgeorize by damage function here:
+# 9
+# Rating Hurricanes by Damage
+damage_scale = {0: 0,
+                1: 100000000,
+                2: 1000000000,
+                3: 10000000000,
+                4: 50000000000}
+  
+# categorize hurricanes in new dictionary with damage severity as key
