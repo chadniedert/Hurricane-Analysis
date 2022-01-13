@@ -64,39 +64,68 @@ for i in range(len(locations_no_dups)):
   affected_area_counts[locations_no_dups[i]] = location_counts[i] 
 #print(affected_area_counts)
 
-
-
-
-
-# 5 
 # Calculating Maximum Hurricane Count
-
 # find most frequently affected area and the number of hurricanes involved in
+def area_affected_most():
+  conv_list = list(affected_area_counts);
+  return conv_list[0]
+#print(area_affected_most())
 
-
-# 6
 # Calculating the Deadliest Hurricane
-
 # find highest mortality hurricane and the number of deaths
+def max_deaths():
+  cane_name = ""
+  max_death_count = 0
+  for k, v in list(zip(names, deaths)):
+    if v > max_death_count:
+      max_death_count = v
+      cane_name = k
+  print("Cane with max deaths -> " + cane_name + "\nNumber of deaths -> " + str(max_death_count))
 
-# 7
 # Rating Hurricanes by Mortality
-
-
 # categorize hurricanes in new dictionary with mortality severity as key
+hurricanes_by_mortality = {0: [], 1: [], 2: [], 3: [], 4: []}
 
-
-# 8 Calculating Hurricane Maximum Damage
-
+for i in range(len(names)):
+  if deaths[i] > 10000:
+    hurricanes_by_mortality[4].append(names[i])
+  elif deaths[i] > 1000:
+    hurricanes_by_mortality[3].append(names[i])
+  elif deaths[i] > 500:
+    hurricanes_by_mortality[2].append(names[i])
+  elif deaths[i] > 100:
+    hurricanes_by_mortality[1].append(names[i])
+  else:
+    hurricanes_by_mortality[0].append(names[i])
+#print(hurricanes_by_mortality)
+    
+# Calculating Hurricane Maximum Damage
 # find highest damage inducing hurricane and its total cost
+max_cost = 0
+for damage in damages:
+ if damage != "Damages not recorded" and damage > max_cost:
+   max_cost = damage
+print(names[damages.index(max_cost)])
 
-
-# 9
 # Rating Hurricanes by Damage
+# categorize hurricanes in new dictionary with damage severity as key
 damage_scale = {0: 0,
                 1: 100000000,
                 2: 1000000000,
                 3: 10000000000,
                 4: 50000000000}
-  
-# categorize hurricanes in new dictionary with damage severity as key
+hurricanes_by_damage = {0:[],1:[],2:[],3:[],4:[],5:[]}
+for i in range(len(names)):
+  if damages[i] != "Damages not recorded" and damages[i] > damage_scale[4]:
+    hurricanes_by_damage[5].append(names[i])
+  elif damages[i] != "Damages not recorded" and damages[i] > damage_scale[3]:
+    hurricanes_by_damage[4].append(names[i])
+  elif damages[i] != "Damages not recorded" and damages[i] > damage_scale[2]:
+    hurricanes_by_damage[3].append(names[i])
+  elif damages[i] != "Damages not recorded" and damages[i] > damage_scale[1]:
+    hurricanes_by_damage[2].append(names[i])
+  elif damages[i] != "Damages not recorded" and damages[i] > damage_scale[0]:
+    hurricanes_by_damage[1].append(names[i])
+  else:
+    hurricanes_by_damage[0].append(names[i])
+print(hurricanes_by_damage)
